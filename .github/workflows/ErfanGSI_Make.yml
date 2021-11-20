@@ -1,4 +1,4 @@
-name: SHRP_Build
+name: ErfanGSI_Make
 
 on:
   workflow_dispatch:
