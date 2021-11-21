@@ -47,16 +47,16 @@ jobs:
         run: |
           git clone https://github.com/erfanoabdi/ErfanGSIs.git
           cd ErfanGSIs
-          bash setup.sh
+          sudo bash setup.sh
       - name: Make GSI
         run: |
           cd ErfanGSIs
-          ./url2GSI.sh --${{ github.event.inputs.ROM_TYPE }} ${{ github.event.inputs.ROM_URL }} -c ${{ github.event.inputs.OS_TYPE }}
+          sudo ./url2GSI.sh --${{ github.event.inputs.ROM_TYPE }} ${{ github.event.inputs.ROM_URL }} -c ${{ github.event.inputs.OS_TYPE }}
       - name: Packing
         run: |
           cd ErfanGSIs
-          zip -r AB_${{ github.event.inputs.REPACK_NAME }} output/*
-          if [ $(ls -l ${{ github.event.inputs.REPACK_NAME }} | awk '{print $5}') -gt 2147483647 ]; then tar cvzpf - ${{ github.event.inputs.REPACK_NAME }} | split -d -b 1024m - upload_${{ github.event.inputs.REPACK_NAME }}; else mv ${{ github.event.inputs.REPACK_NAME }} upload_${{ github.event.inputs.REPACK_NAME }}; fi
+          sudo zip -r AB_${{ github.event.inputs.REPACK_NAME }} output/*
+          sudo if [ $(ls -l ${{ github.event.inputs.REPACK_NAME }} | awk '{print $5}') -gt 2147483647 ]; then tar cvzpf - ${{ github.event.inputs.REPACK_NAME }} | split -d -b 1024m - upload_${{ github.event.inputs.REPACK_NAME }}; else mv ${{ github.event.inputs.REPACK_NAME }} upload_${{ github.event.inputs.REPACK_NAME }}; fi
       - name: Upload to Release
         uses: ncipollo/release-action@v1.8.0
         with:
