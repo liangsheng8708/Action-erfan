@@ -46,6 +46,7 @@ jobs:
       - name: Download Erfan
         run: |
           git clone https://github.com/erfanoabdi/ErfanGSIs.git
+          sudo chmod +777 ErfanGSIs
           cd ErfanGSIs
           sudo bash setup.sh
       - name: Make GSI
